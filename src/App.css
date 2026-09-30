@@ -1,0 +1,190 @@
+/* ---------- Basics ---------- */
+body {
+  margin: 0;
+  background: #181a1c;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* ---------- Page ---------- */
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.header {
+  text-align: center;
+}
+
+.header h1 {
+  color: #4fc3f7;
+  letter-spacing: 3px;
+  margin-bottom: 5px;
+}
+
+.header p {
+  color: gray;
+  margin-top: 0;
+}
+
+/* ---------- The card ---------- */
+/* A grid with 2 columns: pads on the left, controls on the right */
+.machine {
+  width: 100%;
+  max-width: 600px;
+  background: #2a2d3b;
+  border-radius: 14px;
+  padding: 25px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+
+  /* Names for each spot in the grid */
+  grid-template-areas:
+    "pads power"
+    "pads display"
+    "pads volume";
+}
+
+/* Makes the power and volume boxes sit directly inside the grid */
+.controls {
+  display: contents;
+}
+
+/* Put each part in its spot */
+.pad-grid     { grid-area: pads; }
+.power-group  { grid-area: power; }
+.display      { grid-area: display; }
+.volume-group { grid-area: volume; }
+
+/* ---------- Pads ---------- */
+/* 3 equal columns = 3 x 3 grid */
+.pad-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+/* Pads look faded when power is OFF */
+.pad-grid-off {
+  opacity: 0.4;
+}
+
+.pad {
+  aspect-ratio: 1;
+  background: #30344a;
+  color: #4fc3f7;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 4px 4px 8px black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.pad:active {
+  transform: scale(0.95);
+}
+
+.pad-key {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.pad-name {
+  font-size: 11px;
+  color: gray;
+}
+
+/* React adds this class when a pad is hit */
+.pad-active {
+  color: white;
+  box-shadow: 0 0 20px #4fc3f7;
+}
+
+/* ---------- Power ---------- */
+.control-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.power-btn {
+  border: none;
+  border-radius: 4px;
+  padding: 6px 16px;
+  font-weight: bold;
+}
+
+.power-on {
+  background: #2ee6c5;
+  color: black;
+}
+
+.power-off {
+  background: #ff8a9c;
+  color: black;
+}
+
+/* ---------- Display ---------- */
+.display {
+  background: #0b111a;
+  border-radius: 6px;
+  padding: 15px;
+  text-align: center;
+  color: #4fc3f7;
+  font-weight: bold;
+}
+
+/* Hide the extra lines so only the message shows */
+.display-title,
+.display-info {
+  display: none;
+}
+
+.display-message {
+  margin: 0;
+}
+
+/* Message color when power is OFF */
+.display-off .display-message {
+  color: #ff8a9c;
+}
+
+/* ---------- Volume ---------- */
+input[type="range"] {
+  width: 100%;
+  accent-color: #4fc3f7;
+}
+
+/* ---------- Footer ---------- */
+.footer {
+  margin-top: 20px;
+  color: gray;
+}
+
+/* ---------- Phones ---------- */
+/* On small screens, put everything in one column */
+@media (max-width: 560px) {
+  .machine {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "display"
+      "pads"
+      "power"
+      "volume";
+  }
+}
